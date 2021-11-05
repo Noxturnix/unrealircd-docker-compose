@@ -8,7 +8,7 @@ RUN apt update -y && \
 
 RUN groupadd -r unrealircd && useradd -r -m -g unrealircd unrealircd
 
-RUN wget $(curl https://www.unrealircd.org/downloads/list.json -s | jq ".[].Stable.downloads.src" -r) -O unrealircd.tar.gz && \
+RUN wget "$(curl https://www.unrealircd.org/downloads/list.json -s | jq '[.[]][0].Stable.downloads.src' -r)" -O unrealircd.tar.gz && \
     tar -xvf unrealircd.tar.gz && \
     rm unrealircd.tar.gz && \
     mv unrealircd* unrealircd && \
